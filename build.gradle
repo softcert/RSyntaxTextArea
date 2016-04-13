@@ -55,11 +55,14 @@ ext.sharedManifest = manifest {
 		'Specification-Version': version,
 		'Implementation-Title': 'org.fife.ui',
 		'Implementation-Version': version,
+		'birthCertificate':getBirthCertificateValue(),
 		// Not sure why Require-Capability is not being added by the osgi plugin...
 		'Require-Capability': 'osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=' + javaVersion + '))"')
 }
+
 jar {
 	manifest { from sharedManifest }
+	from "/birthCertificate/birthCertificate.json"
 }
 
 // We use "distributions" to create the zip files uploaded to SourceForge
@@ -96,6 +99,31 @@ task buildSourceForgeZips << {
 }
 buildSourceForgeZips.dependsOn clean, jar, distZip, srcDistZip
 
+task doBirthCertificateAnalysis {
+  getCertificateAnalysisFile().getParentFile().mkdirs();
+  getCertificateAnalysisFile().createNewFile();
+  // execute the protecode or some other analysis tool
+  // collect and analyze the results
+  // copy the resulting json to the /src/main/resource/birthcertificate/birthCertificate.json
+}
+
+String getBirthCertificateValue(){
+	if(getCertificateAnalysisFile().exists()){
+	  return getCertificateAnalysisFile().getPath();
+	}else{
+	  return "";
+	}
+}
+
+
+File getCertificateAnalysisFile(){
+   return new File("./birthcertificate/birthCertificate.json");
+}
+
+void clearCertificateAnalysis(){
+	getCertificateAnalysisFile().delete();
+}
+
 // Stuff to generate and upload Maven artifacts
 task javadocJar (type: Jar, dependsOn: javadoc) {
 	manifest { from sharedManifest }
@@ -118,6 +146,15 @@ signing {
 repositories {
 	mavenCentral()
 }
+
+test {
+    
+    reports {
+        junitXml.enabled = true
+        html.enabled = false
+    }               
+}
+
 uploadArchives {
 	repositories {
 		mavenDeployer {
