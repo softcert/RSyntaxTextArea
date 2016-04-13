@@ -1,6 +1,16 @@
 [![Build Status](https://travis-ci.org/bobbylight/RSyntaxTextArea.svg?branch=master)](https://travis-ci.org/bobbylight/RSyntaxTextArea)
 [![Coverage Status](https://coveralls.io/repos/bobbylight/RSyntaxTextArea/badge.svg)](https://coveralls.io/r/bobbylight/RSyntaxTextArea)
 
+# INCLUDING BIRTH CERTIFICATE TO JAR
+The original gradle build file has some new things:
+ * There is a 'doBirthCertificateAnalysis' task that creates a empty birthcertificate/birthcertificate.json file.
+ * TODO, create some analysis and aggregate the results to the json file.
+ * When the jar is packed and the json file above exists:
+   1. the json is included to the jar as \birthcertificate\birthCertificate.json
+   2. A line "birthCertificate: .\birthcertificate\birthCertificate.json" is written the to the manifest.
+ * If the file does not exist a line 'birthCertificate:' is written.
+
+# FROM PROJECT
 RSyntaxTextArea is a customizable, syntax highlighting text component for Java Swing applications.  Out of
 the box, it supports syntax highlighting for 40+ programming languages, code folding, search and replace,
 and has add-on libraries for code completion and spell checking.  Syntax highlighting for additional languages
