@@ -62,8 +62,12 @@ ext.sharedManifest = manifest {
 
 jar {
 	manifest { from sharedManifest }
-	from "/birthCertificate/birthCertificate.json"
-}
+	from ("/birthCertificate/birthCertificate.json"){
+	into ("/birthCertificate/birthCertificate.json")
+	}
+	  
+	
+    }
 
 // We use "distributions" to create the zip files uploaded to SourceForge
 distributions {
@@ -99,6 +103,10 @@ task buildSourceForgeZips << {
 }
 buildSourceForgeZips.dependsOn clean, jar, distZip, srcDistZip
 
+
+//
+// Task for creating the analysis
+//
 task doBirthCertificateAnalysis {
   getCertificateAnalysisFile().getParentFile().mkdirs();
   getCertificateAnalysisFile().createNewFile();
@@ -106,6 +114,7 @@ task doBirthCertificateAnalysis {
   // collect and analyze the results
   // copy the resulting json to the /src/main/resource/birthcertificate/birthCertificate.json
 }
+
 
 String getBirthCertificateValue(){
 	if(getCertificateAnalysisFile().exists()){
