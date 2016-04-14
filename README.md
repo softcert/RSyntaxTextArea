@@ -2,15 +2,33 @@
 [![Coverage Status](https://coveralls.io/repos/bobbylight/RSyntaxTextArea/badge.svg)](https://coveralls.io/r/bobbylight/RSyntaxTextArea)
 
 # INCLUDING BIRTH CERTIFICATE TO JAR
-The original gradle build file has some new things:
- * There is a 'doBirthCertificateAnalysis' task that creates a empty birthcertificate/birthcertificate.json file.
- * TODO, create some analysis and aggregate the results to the json file.
- * When the jar is packed and the json file above exists:
-   1. the json is included to the jar as \birthcertificate\birthCertificate.json
-   2. A line "birthCertificate: .\birthcertificate\birthCertificate.json" is written the to the manifest.
- * If the file does not exist a line 'birthCertificate:' is written.
+Idea is to include birth certificate data to jar file, generated from java project.
+Syntax of the data is open but is may be for example json defining what checks and
+validation is done to the java sources or binaries. For example:
+ * Coverity static analysis scan
+ * Protecode scan results.
+ * Linters (findbugs,checkstyle)
+ * JUNIT test coverage
+ 
+The data is generated for example in CI system or in build phase.
 
-# FROM PROJECT
+# POC
+In the small simple poc gradle build script of the existing open source java project
+is touched to include json file to the generated archive and add reference to it 
+to the manifest.
+
+The json itself is still an empty file, no data is aggregated to it, neither syntax 
+of the data is defined.
+
+The commands that do the trick are
+ * gradle doBirthCertificateAnalysis ; Creates the empty json file birthcertificate/birthcertificate.json
+ * gradle uploadArchives ; If the json file is found, includes the json file to the created archive and adds a reference to it to the manifest file. If the file does not exist a line 'birthCertificate:' is written.
+   
+Later:
+ * The doBirthCertificateAnalysis can aggregate real data from different test resutl sources to the json.
+ * The birth certificate gradle routines can be separeted to own gradle task class. 
+
+# FROM THE ORIGINAL PROJECT
 RSyntaxTextArea is a customizable, syntax highlighting text component for Java Swing applications.  Out of
 the box, it supports syntax highlighting for 40+ programming languages, code folding, search and replace,
 and has add-on libraries for code completion and spell checking.  Syntax highlighting for additional languages
