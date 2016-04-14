@@ -28,6 +28,7 @@ The commands that do the trick are
  * gradle uploadArchives ; If the json file is found, includes the json file to the created archive and adds a reference to it to the manifest file. If the file does not exist a line 'birthCertificate:' is written.
 
 The birth certificate json is like:
+```
 {"BirthCertificate": {
 	"method": "JUNIT"{
 		"coverage": "jacoco"{
@@ -58,7 +59,7 @@ The birth certificate json is like:
 		}
 	}
 } 
-  
+```  
 Later:
  * The birth certificate gradle routines can be separeted to own gradle task class. 
 
