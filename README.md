@@ -17,15 +17,49 @@ In the small simple poc gradle build script of the existing open source java pro
 is touched to include json file to the generated archive and add reference to it 
 to the manifest.
 
-The json itself is still an empty file, no data is aggregated to it, neither syntax 
-of the data is defined.
+JUNIT test coverage obtained from jacoco analysis tool is used as birth certificate data.
+Assumption is that build (and packing the jar) fails if JUNIT test cases fail, 
+so passed/fail is not used as level of quality.
 
 The commands that do the trick are
- * gradle doBirthCertificateAnalysis ; Creates the empty json file birthcertificate/birthcertificate.json
+ * gradle jacocoTestReport; does the junit test case coverity analysis
+  * Creates results (as megabytes of data) to build/reports/jacoco/test/jacocoTestReport.xml 
+ * gradle doBirthCertificateAnalysis ; Reads the jacocoTestReport.xml and creates json out of it to file birthcertificate/birthcertificate.json 
  * gradle uploadArchives ; If the json file is found, includes the json file to the created archive and adds a reference to it to the manifest file. If the file does not exist a line 'birthCertificate:' is written.
-   
+
+The birth certificate json is like:
+{"BirthCertificate": {
+	"method": "JUNIT"{
+		"coverage": "jacoco"{
+			"type":"INSTRUCTION"{
+				"missed":"66729"
+				"covered":"38996"}
+			}
+			"type":"BRANCH"{
+				"missed":"9806"
+				"covered":"3007"}
+			}
+			"type":"LINE"{
+				"missed":"16398"
+				"covered":"9445"}
+			}
+			"type":"COMPLEXITY"{
+				"missed":"8702"
+				"covered":"2883"}
+			}
+			"type":"METHOD"{
+				"missed":"1941"
+				"covered":"1446"}
+			}
+			"type":"CLASS"{
+				"missed":"92"
+				"covered":"206"}
+			}
+		}
+	}
+} 
+  
 Later:
- * The doBirthCertificateAnalysis can aggregate real data from different test resutl sources to the json.
  * The birth certificate gradle routines can be separeted to own gradle task class. 
 
 # FROM THE ORIGINAL PROJECT
