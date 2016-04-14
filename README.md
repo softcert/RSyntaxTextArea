@@ -30,7 +30,7 @@ The commands that do the trick are
 The birth certificate json is like:
 ```
 {"BirthCertificate": {
-	"method": "JUNIT"{
+	"JUNIT": {
 		"coverage": "jacoco"{
 			"type":"INSTRUCTION"{
 				"missed":"66729"
