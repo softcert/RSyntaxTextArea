@@ -31,34 +31,29 @@ The birth certificate json is like:
 ```
 {"BirthCertificate": {
 	"JUNIT": {
-		"coverage": "jacoco"{
-			"type":"INSTRUCTION"{
+		"coverage": {"type":"jacoco"
+			,"INSTRUCTION":{
 				"missed":"66729"
 				"covered":"38996"}
-			}
-			"type":"BRANCH"{
+			,"BRANCH":{
 				"missed":"9806"
 				"covered":"3007"}
-			}
-			"type":"LINE"{
+			,"LINE":{
 				"missed":"16398"
 				"covered":"9445"}
-			}
-			"type":"COMPLEXITY"{
+			,"COMPLEXITY":{
 				"missed":"8702"
 				"covered":"2883"}
-			}
-			"type":"METHOD"{
+			,"METHOD":{
 				"missed":"1941"
 				"covered":"1446"}
-			}
-			"type":"CLASS"{
+			,"CLASS":{
 				"missed":"92"
 				"covered":"206"}
 			}
 		}
 	}
-} 
+}
 ```  
 Later:
  * The birth certificate gradle routines can be separeted to own gradle task class. 
