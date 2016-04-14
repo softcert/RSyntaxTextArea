@@ -121,7 +121,11 @@ task doBirthCertificateAnalysis {
     report.counter.each { counter ->
       sb <<= "\t\t\t,\"${counter.'@type'}\":{\n";
       sb <<= "\t\t\t\t\"missed\":\"${counter.'@missed'}\"\n";
-      sb <<= "\t\t\t\t\"covered\":\"${counter.'@covered'}\"}\n";
+      sb <<= "\t\t\t\t\"covered\":\"${counter.'@covered'}\"\n";
+      float mis = counter.'@missed'.toFloat();
+      float cov = counter.'@covered'.toFloat();
+      float ratio = cov/(cov+mis);
+      sb <<= "\t\t\t\t\"ratio\":\"${ratio}\"}\n";
     }
     sb <<= "\t\t\t}\n";
   }

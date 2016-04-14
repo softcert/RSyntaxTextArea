@@ -34,22 +34,28 @@ The birth certificate json is like:
 		"coverage": {"type":"jacoco"
 			,"INSTRUCTION":{
 				"missed":"66729"
-				"covered":"38996"}
+				"covered":"38996"
+				"ratio":"0.3688437"}
 			,"BRANCH":{
 				"missed":"9806"
-				"covered":"3007"}
+				"covered":"3007"
+				"ratio":"0.23468353"}
 			,"LINE":{
 				"missed":"16398"
-				"covered":"9445"}
+				"covered":"9445"
+				"ratio":"0.36547613"}
 			,"COMPLEXITY":{
 				"missed":"8702"
-				"covered":"2883"}
+				"covered":"2883"
+				"ratio":"0.24885628"}
 			,"METHOD":{
 				"missed":"1941"
-				"covered":"1446"}
+				"covered":"1446"
+				"ratio":"0.4269265"}
 			,"CLASS":{
 				"missed":"92"
-				"covered":"206"}
+				"covered":"206"
+				"ratio":"0.6912752"}
 			}
 		}
 	}
