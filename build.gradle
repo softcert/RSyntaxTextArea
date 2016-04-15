@@ -143,7 +143,7 @@ task doBirthCertificateAnalysis {
 
 String getBirthCertificateValue(){
 	if(getCertificateAnalysisFile().exists()){
-	  return getCertificateAnalysisFile().getPath();
+	  return getCertificateAnalysisFile().getPath().replace("\\","/");
 	}else{
 	  return "";
 	}
